@@ -1182,6 +1182,12 @@
   .boy-stats { grid-template-columns: repeat(2, 1fr); }
   .boy-chip.c2, .boy-chip.c4 { right: 0; }
   .boy-chip.c1, .boy-chip.c3, .boy-chip.c5 { left: 0; }
+  
+  /* Adjust chip positions for mobile to avoid face overlap */
+  .boy-chip.c2 { top: 10% !important; }
+  .boy-chip.c3 { top: 50% !important; }
+  .boy-chip.c5 { top: 80% !important; }
+  
   .hero-video { width: 100%; opacity: 0.35; -webkit-mask-image: none; mask-image: none; }
 }
 @media (max-width: 560px) {
