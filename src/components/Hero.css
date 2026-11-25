@@ -1184,7 +1184,7 @@
   .boy-chip.c1, .boy-chip.c3, .boy-chip.c5 { left: 0; }
   
   /* Adjust chip positions for mobile to avoid face overlap */
-  .boy-chip.c2 { top: 10% !important; }
+  .boy-chip.c2 { top: 2% !important; }
   .boy-chip.c3 { top: 50% !important; }
   .boy-chip.c5 { top: 80% !important; }
   
