@@ -1,0 +1,672 @@
+/* ==========================================================
+   Services section — alternating showcase layout
+   Every class is prefixed "xsv-" so no other stylesheet
+   (global h3 / li / .svc rules) can override it.
+   ========================================================== */
+
+.xsv {
+  --xsv-bg: #070a1c;
+  --xsv-ink: #f8fafc;
+  --xsv-muted: #a3b0c7;
+  --xsv-soft: #cbd5e1;
+  --xsv-line: rgba(148, 163, 184, 0.16);
+  --xsv-indigo: #6366f1;
+  --xsv-violet: #8b5cf6;
+  --xsv-pink: #ec4899;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(4rem, 9vw, 7.5rem) 0;
+  background: var(--xsv-bg);
+  color: var(--xsv-ink);
+}
+
+.xsv::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(rgba(129, 140, 248, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(129, 140, 248, 0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 80%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 80%, transparent);
+}
+
+.xsv::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(560px circle at 8% 18%, rgba(99, 102, 241, 0.22), transparent 70%),
+    radial-gradient(560px circle at 95% 55%, rgba(236, 72, 153, 0.14), transparent 70%),
+    radial-gradient(500px circle at 10% 88%, rgba(139, 92, 246, 0.16), transparent 70%);
+}
+
+.xsv-wrap {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ---------- Header (split) ---------- */
+
+.xsv-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: clamp(3rem, 7vw, 5.5rem);
+  padding-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  border-bottom: 1px solid var(--xsv-line);
+}
+
+.xsv-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1.4rem;
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(129, 140, 248, 0.35);
+  background: rgba(99, 102, 241, 0.1);
+  color: #a5b4fc;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.xsv-kicker::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #34d399;
+  animation: xsv-ping 2.2s ease-out infinite;
+}
+
+.xsv-h2 {
+  margin: 0;
+  color: var(--xsv-ink);
+  font-size: clamp(2.4rem, 6.4vw, 4.75rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+.xsv-h2 span {
+  background: linear-gradient(100deg, #a5b4fc, #c084fc 55%, #f472b6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.xsv-head-side {
+  max-width: 21rem;
+  padding-bottom: 0.4rem;
+}
+
+.xsv-lede {
+  margin: 0 0 1.25rem;
+  color: var(--xsv-muted);
+  font-size: clamp(1.02rem, 2vw, 1.2rem);
+  line-height: 1.55;
+}
+
+.xsv-textlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #c7d2fe;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s ease, gap 0.2s ease;
+}
+
+.xsv-textlink svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.xsv-textlink:hover {
+  color: #fff;
+  gap: 0.9rem;
+}
+
+/* ---------- Service rows ---------- */
+
+.xsv-row {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  margin-bottom: clamp(3.5rem, 8vw, 6.5rem);
+}
+
+.xsv-row.is-rev {
+  grid-template-columns: 1fr 1.15fr;
+}
+
+.xsv-row.is-rev .xsv-media {
+  order: 2;
+}
+
+/* ----- media ----- */
+
+.xsv-media {
+  --tilt: 5deg;
+  position: relative;
+  perspective: 1400px;
+}
+
+.is-rev .xsv-media {
+  --tilt: -5deg;
+}
+
+.xsv-orb {
+  position: absolute;
+  inset: 8% 6%;
+  z-index: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.55), rgba(236, 72, 153, 0.4));
+  filter: blur(70px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.xsv-frame {
+  --mx: 50%;
+  --my: 0%;
+
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 520 / 320;
+  border-radius: 1.75rem;
+  border: 1px solid rgba(165, 180, 252, 0.25);
+  background:
+    linear-gradient(rgba(129, 140, 248, 0.08) 1px, transparent 1px) 0 0 / 100% 40px,
+    linear-gradient(135deg, #1e1b4b, #0f172a);
+  overflow: hidden;
+  box-shadow:
+    0 40px 80px -30px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  transform: rotateY(var(--tilt));
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.4s ease;
+}
+
+.xsv-frame:hover {
+  transform: rotateY(0deg) translateY(-6px);
+  box-shadow:
+    0 50px 90px -30px rgba(99, 102, 241, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+}
+
+/* cursor spotlight over the picture */
+.xsv-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(360px circle at var(--mx) var(--my), rgba(165, 180, 252, 0.18), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.xsv-frame:hover::after {
+  opacity: 1;
+}
+
+.xsv-art,
+.xsv-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.xsv-photo {
+  object-fit: cover;
+}
+
+.xsv-float {
+  transform-box: fill-box;
+  animation: xsv-bob 5s ease-in-out infinite;
+}
+
+.xsv-float-b {
+  animation-duration: 6s;
+  animation-delay: -2s;
+}
+
+/* ----- body ----- */
+
+.xsv-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.4rem;
+}
+
+.xsv-icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.95rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--xsv-indigo), var(--xsv-violet));
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.18) inset,
+    0 12px 28px -6px rgba(99, 102, 241, 0.65);
+}
+
+.xsv-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.xsv-eyebrow-label {
+  color: #a5b4fc;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.xsv-index {
+  margin-left: auto;
+  font-size: 4.2rem;
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(165, 180, 252, 0.3);
+  user-select: none;
+}
+
+.xsv-title {
+  margin: 0 0 0.8rem;
+  color: var(--xsv-ink);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.xsv-text {
+  max-width: 28rem;
+  margin: 0 0 1.75rem;
+  color: var(--xsv-muted);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* ----- chips (tidy grid) ----- */
+
+.xsv-chips {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: 0.65rem;
+  margin: 0 0 2.1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.xsv-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0.8rem 1rem;
+  border-radius: 0.9rem;
+  border: 1px solid var(--xsv-line);
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--xsv-soft);
+  font-size: 0.97rem;
+  font-weight: 500;
+  line-height: 1.2;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.xsv-chip svg {
+  flex: none;
+  width: 1.1rem;
+  height: 1.1rem;
+  padding: 0.22rem;
+  border-radius: 50%;
+  color: #c7d2fe;
+  background: rgba(99, 102, 241, 0.4);
+}
+
+.xsv-chip:hover {
+  transform: translateY(-2px);
+  border-color: rgba(129, 140, 248, 0.55);
+  background: rgba(99, 102, 241, 0.14);
+  color: #fff;
+}
+
+/* ---------- Buttons ---------- */
+
+.xsv-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  padding: 0.95rem 1.8rem;
+  border-radius: 0.9rem;
+  font-size: 0.98rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease, gap 0.2s ease;
+}
+
+.xsv-btn svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.xsv-btn-main {
+  color: #fff;
+  background: linear-gradient(135deg, var(--xsv-indigo), var(--xsv-violet));
+  box-shadow: 0 10px 28px -8px rgba(99, 102, 241, 0.7);
+}
+
+.xsv-btn-main:hover {
+  transform: translateY(-2px);
+  gap: 1rem;
+  box-shadow: 0 16px 34px -8px rgba(139, 92, 246, 0.85);
+}
+
+.xsv-btn-ghost {
+  color: #c7d2fe;
+  border: 1px solid rgba(165, 180, 252, 0.4);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.xsv-btn-ghost:hover {
+  color: #fff;
+  border-color: #a5b4fc;
+  background: rgba(99, 102, 241, 0.14);
+}
+
+.xsv-btn:focus-visible,
+.xsv-textlink:focus-visible {
+  outline: 2px solid #c7d2fe;
+  outline-offset: 3px;
+}
+
+/* ---------- Process strip ---------- */
+
+.xsv-steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin: 0 0 clamp(2.5rem, 5vw, 4rem);
+  padding: 0;
+  list-style: none;
+}
+
+/* connecting line behind the dots */
+.xsv-steps::before {
+  content: '';
+  position: absolute;
+  top: 1.35rem;
+  left: 1.35rem;
+  right: 1.35rem;
+  height: 2px;
+  background: linear-gradient(90deg, var(--xsv-indigo), var(--xsv-violet), var(--xsv-pink));
+  opacity: 0.45;
+}
+
+.xsv-step {
+  position: relative;
+  margin: 0;
+}
+
+.xsv-step-dot {
+  display: grid;
+  place-items: center;
+  width: 2.7rem;
+  height: 2.7rem;
+  margin-bottom: 1.1rem;
+  border-radius: 50%;
+  border: 2px solid #a5b4fc;
+  background: #0b1030;
+  color: #e0e7ff;
+  font-weight: 800;
+  box-shadow: 0 0 0 6px var(--xsv-bg), 0 0 24px -2px rgba(99, 102, 241, 0.7);
+}
+
+.xsv-step-title {
+  margin: 0 0 0.35rem;
+  color: var(--xsv-ink);
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.xsv-step-text {
+  max-width: 15rem;
+  margin: 0;
+  color: var(--xsv-muted);
+  font-size: 0.97rem;
+  line-height: 1.5;
+}
+
+/* ---------- Banner ---------- */
+
+.xsv-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: clamp(1.6rem, 3.5vw, 2.5rem);
+  border-radius: 1.75rem;
+  background:
+    radial-gradient(600px circle at 0% 0%, rgba(99, 102, 241, 0.22), transparent 60%),
+    radial-gradient(600px circle at 100% 100%, rgba(236, 72, 153, 0.16), transparent 60%),
+    rgba(255, 255, 255, 0.03);
+}
+
+.xsv-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(120deg, rgba(99, 102, 241, 0.8), rgba(139, 92, 246, 0.25) 45%, rgba(236, 72, 153, 0.7));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+
+.xsv-banner-copy {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.xsv-banner-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  color: #c7d2fe;
+  border: 1px solid rgba(165, 180, 252, 0.35);
+  background: rgba(99, 102, 241, 0.16);
+}
+
+.xsv-banner-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.xsv-banner-title {
+  margin: 0 0 0.4rem;
+  color: var(--xsv-ink);
+  font-size: clamp(1.3rem, 2.6vw, 1.7rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.xsv-banner-text {
+  margin: 0;
+  color: var(--xsv-muted);
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+.xsv-banner-cta {
+  display: flex;
+  flex: none;
+  gap: 0.9rem;
+}
+
+/* ---------- Animations ---------- */
+
+@keyframes xsv-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
+
+@keyframes xsv-ping {
+  0%   { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55); }
+  80%, 100% { box-shadow: 0 0 0 0.55rem rgba(52, 211, 153, 0); }
+}
+
+/* ---------- One-time entrance ---------- */
+
+.xsv .xsv-head,
+.xsv .xsv-row,
+.xsv .xsv-steps,
+.xsv .xsv-banner {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.xsv.is-in .xsv-head,
+.xsv.is-in .xsv-row,
+.xsv.is-in .xsv-steps,
+.xsv.is-in .xsv-banner {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.xsv.is-in .xsv-row:nth-of-type(1) { transition-delay: 0.1s; }
+.xsv.is-in .xsv-row:nth-of-type(2) { transition-delay: 0.22s; }
+.xsv.is-in .xsv-steps  { transition-delay: 0.3s; }
+.xsv.is-in .xsv-banner { transition-delay: 0.4s; }
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 960px) {
+  .xsv-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .xsv-head-side {
+    max-width: 30rem;
+  }
+
+  .xsv-row,
+  .xsv-row.is-rev {
+    grid-template-columns: 1fr;
+  }
+
+  .xsv-row.is-rev .xsv-media {
+    order: 0;
+  }
+
+  .xsv-media {
+    --tilt: 0deg;
+  }
+
+  .is-rev .xsv-media {
+    --tilt: 0deg;
+  }
+
+  .xsv-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 2.25rem;
+  }
+
+  .xsv-steps::before {
+    display: none;
+  }
+
+  .xsv-banner {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .xsv-banner-copy,
+  .xsv-banner-cta {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 560px) {
+  .xsv-wrap {
+    padding: 0 1rem;
+  }
+
+  .xsv-index {
+    font-size: 3rem;
+  }
+
+  .xsv-chips {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .xsv-chip {
+    padding: 0.7rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .xsv-btn-main {
+    white-space: normal;
+  }
+
+  .xsv-steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .xsv-frame {
+    transition: none;
+  }
+
+  .xsv-float,
+  .xsv-kicker::before {
+    animation: none;
+  }
+
+  .xsv .xsv-head,
+  .xsv .xsv-row,
+  .xsv .xsv-steps,
+  .xsv .xsv-banner {
+    opacity: 1;
+    transform: none;
+    transition: none !important;
+  }
+
+  .xsv-chip,
+  .xsv-btn,
+  .xsv-textlink {
+    transition: none;
+  }
+}

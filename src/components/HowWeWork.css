@@ -1,0 +1,149 @@
+/* ============================================
+   HOW WE WORK SECTION
+   ============================================ */
+
+.hww-section {
+  --hww-accent: #1f6bff;
+  --hww-accent-soft: #5b8fff;
+  --hww-accent-shadow: rgba(31, 107, 255, 0.18);
+  padding: 4rem 1.5rem 6rem;
+  background-color: #f8fafc;
+  background-image: radial-gradient(#d9dee5 1px, transparent 1px);
+  background-size: 22px 22px;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
+
+.hww-title {
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  font-weight: 800;
+  color: var(--hww-accent);
+  text-align: center;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0 0 3rem;
+}
+
+/* Staircase layout */
+.hww-grid {
+  max-width: 1260px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.1rem;
+  align-items: start;
+}
+
+.hww-card-1 { margin-top: 0; }
+.hww-card-2 { margin-top: 3rem; }
+.hww-card-3 { margin-top: 6rem; }
+.hww-card-4 { margin-top: 9rem; }
+
+/* Card */
+.hww-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid transparent;
+  border-radius: 1rem;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+/* Hover OR default (card 1 when nothing is hovered) = open state */
+.hww-card:hover,
+.hww-grid:not(:hover) .hww-card-1 {
+  border-color: var(--hww-accent-soft);
+  box-shadow: 0 14px 34px var(--hww-accent-shadow);
+  transform: translateY(-4px);
+}
+
+/* Image that "opens" on hover */
+.hww-image {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  border-radius: 1rem 1rem 0 0;
+  background: #e4edff;
+  transition: max-height 0.5s ease, opacity 0.4s ease;
+}
+
+.hww-image img {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.hww-card:hover .hww-image,
+.hww-grid:not(:hover) .hww-card-1 .hww-image {
+  max-height: 180px;
+  opacity: 1;
+}
+
+/* Content */
+.hww-content {
+  padding: 1.1rem 1.5rem 1.4rem;
+}
+
+.hww-num {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--hww-accent);
+  margin-bottom: 0.2rem;
+}
+
+.hww-step-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--hww-accent);
+  margin: 0 0 0.5rem;
+  line-height: 1.1;
+}
+
+.hww-desc {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #64748b;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* Dashed arrow to next card */
+.hww-arrow {
+  position: absolute;
+  top: -4px;
+  right: -52px;
+  width: 52px;
+  height: 32px;
+  color: var(--hww-accent);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .hww-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .hww-card-1, .hww-card-2, .hww-card-3, .hww-card-4 { margin-top: 0; }
+  .hww-arrow { display: none; }
+}
+
+@media (max-width: 640px) {
+  .hww-grid { grid-template-columns: 1fr; }
+
+  /* no hover on touch: keep images visible */
+  .hww-image { max-height: 180px; opacity: 1; }
+}
+
+/* Global h2/h3 colour override fix */
+.hww-section .hww-title,
+.hww-section .hww-step-title {
+  color: var(--hww-accent) !important;
+  -webkit-text-fill-color: var(--hww-accent);
+  background: none;
+  opacity: 1;
+}

@@ -1,0 +1,439 @@
+/* ==========================================================
+   Contact section — dark, compact, matches the Services section
+   Every class is prefixed "xct-" so no global rule can leak in.
+   ========================================================== */
+
+/* "#contact.xct" beats any global "#contact { ... }" rule in your site CSS */
+#contact.xct {
+  --xct-bg: #070a1c;
+  --xct-ink: #f8fafc;
+  --xct-muted: #a3b0c7;
+  --xct-line: rgba(148, 163, 184, 0.18);
+  --xct-indigo: #6366f1;
+  --xct-violet: #8b5cf6;
+  --xct-pink: #ec4899;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(3.5rem, 8vw, 6rem) 0 !important;
+  background: var(--xct-bg) !important;
+  color: var(--xct-ink);
+}
+
+#contact.xct::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(600px circle at 5% 20%, rgba(99, 102, 241, 0.25), transparent 70%),
+    radial-gradient(600px circle at 95% 85%, rgba(236, 72, 153, 0.16), transparent 70%);
+}
+
+#contact.xct::after {
+  content: none;
+}
+
+.xct-wrap {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.xct-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+/* ---------- Info side ---------- */
+
+.xct-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1.25rem;
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(129, 140, 248, 0.35);
+  background: rgba(99, 102, 241, 0.1);
+  color: #a5b4fc;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.xct-kicker::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #34d399;
+  animation: xct-ping 2.2s ease-out infinite;
+}
+
+.xct-h2 {
+  margin: 0 0 1rem;
+  color: var(--xct-ink);
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+.xct-h2 span {
+  background: linear-gradient(100deg, #a5b4fc, #c084fc 55%, #f472b6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.xct-lede {
+  max-width: 28rem;
+  margin: 0 0 2rem;
+  color: var(--xct-muted);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.xct-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.xct-cards li {
+  margin: 0;
+}
+
+.xct-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.85rem;
+  height: 100%;
+  padding: 1.1rem 1.15rem;
+  border-radius: 1rem;
+  border: 1px solid var(--xct-line);
+  background: rgba(255, 255, 255, 0.04);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.xct-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(129, 140, 248, 0.55);
+  background: rgba(99, 102, 241, 0.12);
+}
+
+.xct-card-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--xct-indigo), var(--xct-violet));
+  box-shadow: 0 8px 20px -6px rgba(99, 102, 241, 0.7);
+}
+
+.xct-card-icon svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.xct-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.xct-card-label {
+  color: #a5b4fc;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.xct-card-value {
+  color: var(--xct-ink);
+  font-size: 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ---------- Form ---------- */
+
+.xct-form {
+  position: relative;
+  padding: clamp(1.4rem, 3vw, 2rem);
+  border-radius: 1.5rem;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 40px 80px -40px rgba(99, 102, 241, 0.5);
+}
+
+/* gradient hairline border */
+.xct-form::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(130deg, rgba(99, 102, 241, 0.8), rgba(139, 92, 246, 0.2) 45%, rgba(236, 72, 153, 0.7));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+
+.xct-form-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.xct-form-title {
+  margin: 0;
+  color: var(--xct-ink);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.xct-form-note {
+  color: var(--xct-muted);
+  font-size: 0.85rem;
+}
+
+.xct-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.95rem;
+}
+
+.xct-span {
+  grid-column: 1 / -1;
+}
+
+.xct-field {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.xct-field label,
+.xct-field legend {
+  display: block;
+  margin: 0 0 0.4rem;
+  padding: 0;
+  color: #cbd5e1;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.xct-field label em {
+  color: var(--xct-muted);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.xct-field input[type='text'],
+.xct-field input[type='email'],
+.xct-field input[type='tel'],
+.xct-field textarea {
+  display: block;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 0.8rem;
+  border: 1px solid var(--xct-line);
+  background: rgba(7, 10, 28, 0.6);
+  color: var(--xct-ink);
+  font: inherit;
+  font-size: 0.97rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.xct-field textarea {
+  min-height: 5.5rem;
+  resize: vertical;
+}
+
+.xct-field input::placeholder,
+.xct-field textarea::placeholder {
+  color: #64748b;
+}
+
+.xct-field input:focus,
+.xct-field textarea:focus {
+  outline: none;
+  border-color: #818cf8;
+  background: rgba(7, 10, 28, 0.9);
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.22);
+}
+
+/* service pills (radio buttons) */
+
+.xct-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.xct-field .xct-pill {
+  position: relative;
+  margin: 0;
+  cursor: pointer;
+}
+
+.xct-pill input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.xct-pill span {
+  display: inline-block;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--xct-line);
+  background: rgba(255, 255, 255, 0.04);
+  color: #cbd5e1;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.xct-pill:hover span {
+  border-color: rgba(129, 140, 248, 0.55);
+  color: #fff;
+}
+
+.xct-pill input:checked + span {
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--xct-indigo), var(--xct-violet));
+  color: #fff;
+  box-shadow: 0 8px 20px -8px rgba(99, 102, 241, 0.8);
+}
+
+.xct-pill input:focus-visible + span {
+  outline: 2px solid #c7d2fe;
+  outline-offset: 2px;
+}
+
+/* submit */
+
+.xct-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  width: 100%;
+  margin-top: 1.25rem;
+  padding: 0.95rem 1.5rem;
+  border: 0;
+  border-radius: 0.9rem;
+  color: #fff;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--xct-indigo), var(--xct-violet));
+  box-shadow: 0 12px 30px -8px rgba(99, 102, 241, 0.7);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.xct-submit svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  transition: transform 0.25s ease;
+}
+
+.xct-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 36px -8px rgba(139, 92, 246, 0.85);
+}
+
+.xct-submit:hover svg {
+  transform: translate(3px, -3px);
+}
+
+.xct-submit:active {
+  transform: translateY(0);
+}
+
+.xct-submit:focus-visible {
+  outline: 2px solid #c7d2fe;
+  outline-offset: 3px;
+}
+
+.xct-status {
+  min-height: 1.25rem;
+  margin: 0.8rem 0 0;
+  color: #6ee7b7;
+  font-size: 0.9rem;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.xct-status.is-on {
+  opacity: 1;
+}
+
+@keyframes xct-ping {
+  0%   { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55); }
+  80%, 100% { box-shadow: 0 0 0 0.55rem rgba(52, 211, 153, 0); }
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 960px) {
+  .xct-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .xct-wrap {
+    padding: 0 1rem;
+  }
+
+  .xct-cards,
+  .xct-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .xct-form-head {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .xct-kicker::before {
+    animation: none;
+  }
+
+  .xct-card,
+  .xct-submit,
+  .xct-submit svg,
+  .xct-pill span {
+    transition: none;
+  }
+}
