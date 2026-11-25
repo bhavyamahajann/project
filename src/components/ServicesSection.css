@@ -227,6 +227,11 @@
   height: 100%;
 }
 
+.xsv-art-img {
+  object-fit: cover;
+  object-position: center;
+}
+
 .xsv-photo {
   object-fit: cover;
 }

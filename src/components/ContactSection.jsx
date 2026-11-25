@@ -96,19 +96,19 @@ function ContactSection() {
             <div className="xct-fields">
               <div className="xct-field">
                 <label htmlFor="xct-name">Your name</label>
-                <input id="xct-name" name="name" type="text" placeholder="John Doe" autoComplete="name" required />
+                <input id="xct-name" name="name" type="text" placeholder="Name" autoComplete="name" required />
               </div>
 
               <div className="xct-field">
                 <label htmlFor="xct-email">Email</label>
-                <input id="xct-email" name="email" type="email" placeholder="john@example.com" autoComplete="email" required />
+                <input id="xct-email" name="email" type="email" placeholder="Email" autoComplete="email" required />
               </div>
 
               <div className="xct-field xct-span">
                 <label htmlFor="xct-phone">
                   Phone <em>(optional)</em>
                 </label>
-                <input id="xct-phone" name="phone" type="tel" placeholder="+91 99999 99999" autoComplete="tel" />
+                <input id="xct-phone" name="phone" type="tel" placeholder="9999999999" autoComplete="tel" />
               </div>
 
               <fieldset className="xct-field xct-span xct-service">
@@ -125,7 +125,7 @@ function ContactSection() {
 
               <div className="xct-field xct-span">
                 <label htmlFor="xct-message">Tell us about your project</label>
-                <textarea id="xct-message" name="message" rows="3" placeholder="Goals, timeline, anything that helps…" required />
+                <textarea id="xct-message" name="message" rows="3" placeholder="" required />
               </div>
             </div>
 
