@@ -7,6 +7,22 @@
   z-index: 1000;
   background: none;
   pointer-events: none;
+  
+  /* Fade in + blur to clear animation */
+  animation: fadeInBlur 1.2s ease-out forwards;
+}
+
+@keyframes fadeInBlur {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
 }
 
 .navbar {
